@@ -183,7 +183,7 @@ void gameMain(float delta_time) {
 	}
 
 	
-	if (isShowEnterTex == true ) {
+	if (isShowEnterTex == true) {
 		SetFontSize(60);
 		DrawString(450, 400, pressEnter_Str.c_str(), -1);
 		MoveSliderPerFrame(delta_time);

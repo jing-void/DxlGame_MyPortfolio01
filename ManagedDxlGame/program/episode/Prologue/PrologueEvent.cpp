@@ -432,7 +432,7 @@ void ShowPrologueTextLog(float delta_time) {
 	}
 	else {
 
-// 女神シーン----------------------------------------------------------------------------------------------------------------------------------
+		// 女神シーン----------------------------------------------------------------------------------------------------------------------------------
 		SetFontSize(20);
 
 		switch (scenePhase)
@@ -471,32 +471,32 @@ void ShowPrologueTextLog(float delta_time) {
 				scenePhase = 1;
 			}
 			break;
-//　フィナシーン------------------------------------------------------------------------------------------------------------------------------
+			//　フィナシーン------------------------------------------------------------------------------------------------------------------------------
 		case 1:
 			DrawRotaGraph(500, 50, 1.0f, 0.0f, BGHdl_FinaScene, true);
 
 			if (currentMessLine > 71 && currentMessLine < 127) {
 				DrawWholePlayer();
 			}
-			
-			if(currentMessLine > 71 && currentMessLine <= 80)	DrawGirl(girl_secret);
+
+			if (currentMessLine > 71 && currentMessLine <= 80)	DrawGirl(girl_secret);
 
 			if (currentMessLine == 81 || currentMessLine == 82 || currentMessLine == 83 ||
 				currentMessLine == 84 || currentMessLine == 87 || currentMessLine == 88 || currentMessLine == 97 ||
-				currentMessLine == 113|| currentMessLine == 114 || currentMessLine == 115) {
+				currentMessLine == 113 || currentMessLine == 114 || currentMessLine == 115) {
 				DrawGirl(girl_normal);
 			}
 			if (currentMessLine == 85 || currentMessLine == 86 || currentMessLine == 95 || currentMessLine == 96 ||
 				currentMessLine == 112 || currentMessLine == 113) {
 				DrawGirl(girl_serious);
 			}
-			if (currentMessLine == 93 || currentMessLine == 95 || currentMessLine == 98 || currentMessLine == 99 ||
+			if (currentMessLine == 93 || currentMessLine == 94 || currentMessLine == 98 || currentMessLine == 99 ||
 				currentMessLine == 100 || currentMessLine == 101 || currentMessLine == 102 ||
 				currentMessLine == 103 || currentMessLine == 104 || currentMessLine == 105 ||
-				currentMessLine == 105 || currentMessLine == 106 || currentMessLine == 107 || 
-				currentMessLine == 108 || currentMessLine == 109 || currentMessLine == 110 || 
-				currentMessLine == 111 || currentMessLine == 121 ||	currentMessLine == 122 || 
-				currentMessLine == 123 || currentMessLine == 124 || currentMessLine == 125 || 
+				currentMessLine == 105 || currentMessLine == 106 || currentMessLine == 107 ||
+				currentMessLine == 108 || currentMessLine == 109 || currentMessLine == 110 ||
+				currentMessLine == 111 || currentMessLine == 121 || currentMessLine == 122 ||
+				currentMessLine == 123 || currentMessLine == 124 || currentMessLine == 125 ||
 				currentMessLine == 126) {
 				DrawGirl(girl_smile);
 			}
@@ -511,7 +511,7 @@ void ShowPrologueTextLog(float delta_time) {
 
 			break;
 		}
-		
+
 
 		SetDrawBright(255, 255, 255);
 
@@ -556,7 +556,7 @@ void ShowPrologueTextLog(float delta_time) {
 	if (currentMessLine == 9 || currentMessLine == 12 || currentMessLine == 16 || currentMessLine == 21 || currentMessLine == 22 ||
 		currentMessLine == 24 || currentMessLine == 27 || currentMessLine == 31 || currentMessLine == 34 || currentMessLine == 36 ||
 		currentMessLine == 39 || currentMessLine == 43 || currentMessLine == 48 || currentMessLine == 51 || currentMessLine == 54 ||
-		currentMessLine == 57 || currentMessLine == 60 || currentMessLine == 62 || currentMessLine == 65 || currentMessLine == 67 || 
+		currentMessLine == 57 || currentMessLine == 60 || currentMessLine == 62 || currentMessLine == 65 || currentMessLine == 67 ||
 		currentMessLine == 71 || currentMessLine == 76 || currentMessLine == 82 || currentMessLine == 86 || currentMessLine == 88 ||
 		currentMessLine == 91 || currentMessLine == 107 || currentMessLine == 113 || currentMessLine == 117 || currentMessLine == 125) {
 
@@ -699,7 +699,6 @@ void DrawFuncBtns() {
 }
 
 
-
 void ZoomBtnsOnMouseOver(const FuncBtnsInfo& btnInfo) {
 	int hoveredX, hoveredY;
 	float scaleSize;
@@ -722,7 +721,8 @@ void AddClickFuncOnBtns(const FuncBtnsInfo& btnInfos) {
 
 	if (GetMouseInput() && MOUSE_INPUT_LEFT) {
 
-		if (clickX_axis >= btnInfos.x && clickX_axis <= btnInfos.x + btnInfos.width && clickY_axis >= btnInfos.y && clickY_axis <= btnInfos.y + btnInfos.height) {
+		if (clickX_axis >= btnInfos.x && clickX_axis <= btnInfos.x + btnInfos.width && 
+			clickY_axis >= btnInfos.y && clickY_axis <= btnInfos.y + btnInfos.height) {
 			// TITLEボタン
 			if (btnInfos.x >= TITLE_BTNFUNC_POS.x && btnInfos.x <= TITLE_BTNFUNC_POS.x + btnInfos.width
 				&& btnInfos.y >= TITLE_BTNFUNC_POS.y && btnInfos.y <= TITLE_BTNFUNC_POS.y + btnInfos.height) {
@@ -741,12 +741,8 @@ void AddClickFuncOnBtns(const FuncBtnsInfo& btnInfos) {
 			// AUTOボタン
 			if (btnInfos.x >= AUTO_BTNFUNC_POS.x && btnInfos.x <= AUTO_BTNFUNC_POS.x + btnInfos.width
 				&& btnInfos.y >= AUTO_BTNFUNC_POS.y && btnInfos.y <= AUTO_BTNFUNC_POS.y + btnInfos.height) {
-
-				currentMessLine++;
-				/*autoText = !autoText;*/
-
+				autoText = !autoText;
 			}
-
 			// SKIPボタン
 			if (btnInfos.x >= SKIP_BTNFUNC_POS.x && btnInfos.x <= SKIP_BTNFUNC_POS.x + btnInfos.width
 				&& btnInfos.y >= SKIP_BTNFUNC_POS.y && btnInfos.y <= SKIP_BTNFUNC_POS.y + btnInfos.height) {

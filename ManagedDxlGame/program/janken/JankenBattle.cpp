@@ -134,7 +134,7 @@ int villageEnemy_Default, villageEnemy_OneHitD;
 int cityEnemy_Default, cityEnemy_OneHitD, cityEnemy_TwoHitD;
 int theocraEnemy_Default, theocraEnemy_OneHitD, theocraEnemy_TwoHitD, theocraEnemy_ThreeHitD;
 int kingdomEnemy_Default, kingdomEnemy_OneHitD, kingdomEnemy_TwoHitD,
-kingdomEnemy_ThreeHitD, kingdomEnemy_FourHitD;
+kingdomEnemy_ThreeHitD, kingdomEnemy_FourHitD, kingdomEnemy_smile, kingdomEnemy_secret;
 
 int preparing_EnemyImg;
 
@@ -164,6 +164,17 @@ isRetryGame = false;
 int ep1BGM_phase = 0, ep2BGM_phase = 0, ep3BGM_phase = 0, ep4BGM_phase = 0, ep5BGM_phase = 0, ep6BGM_phase = 0;
 
 void JankenBattle() {
+
+	if (currentBattleState == ONMAP) {
+		isShowSymbols = true;
+		if (showMenu && onSelectEps) {
+			isShowSymbols = false;
+		}
+		ReturnToMap();
+	}
+	else if (currentBattleState == TITLE) {
+		sceneTitle();
+	}
 
 	if (currentBattleState == SLIDEREVENT || currentBattleState == STILL_BATTLING || currentBattleState == SHOWRESULT) {
 		if (episodeNum == 1) {
@@ -232,18 +243,6 @@ void JankenBattle() {
 				break;
 			}
 		}
-	}
-
-
-	if (currentBattleState == ONMAP) {
-		isShowSymbols = true;
-		if (showMenu && onSelectEps) {
-			isShowSymbols = false;
-		}		
-		ReturnToMap();
-	}
-	else if (currentBattleState == TITLE) {
-		sceneTitle();
 	}
 
 
@@ -647,6 +646,7 @@ void JankenBattle() {
 				if (showMenu && onSelectEps) {
 					isShowSymbols = false;
 				}
+				InitBGM_phase();
 				ReturnToMap();
 
 				currentBattleState = ENDBATTLE;
@@ -845,6 +845,7 @@ void InitHP() {
 }
 
 void ReturnToMap() {
+
 	FlashSymbolAndMap(1);
 }
 
@@ -861,8 +862,33 @@ void LoadSliderHandle() {
 
 void MoveSliderPerFrame(float deltaTime) {
 	const int imgTotalNum = 11;
+	float speed;
 
-	anim_time_count += deltaTime;
+	if (episodeNum == 1 || episodeNum == 2 && enemyHP == 2 || episodeNum == 3 && enemyHP == 3
+		|| episodeNum == 4 && enemyHP == 4 || episodeNum == 5 && enemyHP == 5) {
+
+		speed = 1.0f;
+	}
+	if (episodeNum == 2 && enemyHP == 1 || episodeNum == 3 && enemyHP == 2
+		|| episodeNum == 4 && enemyHP == 3 || episodeNum == 5 && enemyHP == 4) {
+
+		speed = 1.25f;
+	}
+	if (episodeNum == 3 && enemyHP == 1 || episodeNum == 4 && enemyHP == 2
+		|| episodeNum == 5 && enemyHP == 3) {
+
+		speed = 1.5f;
+	}
+	if (episodeNum == 4 && enemyHP == 1 || episodeNum == 5 && enemyHP == 2) {
+
+		speed = 1.75f;
+	}
+	if (episodeNum == 5 && enemyHP == 1) {
+		speed = 2.0f;
+	}
+
+
+	anim_time_count += deltaTime * speed;
 	if (anim_time_count > 0.1f) {
 		anim_ctrl_frame++;
 		anim_ctrl_frame %= 11;
@@ -1016,6 +1042,8 @@ void LoadEnemyImage() {
 	kingdomEnemy_TwoHitD = LoadGraph("graphics/キャラクター素材/Kingdom_Enemy/twoHit.png");
 	kingdomEnemy_ThreeHitD = LoadGraph("graphics/キャラクター素材/Kingdom_Enemy/threeHit.png");
 	kingdomEnemy_FourHitD = LoadGraph("graphics/キャラクター素材/Kingdom_Enemy/fourHit.png");
+	kingdomEnemy_smile = LoadGraph("graphics/キャラクター素材/Kingdom_Enemy/smile.png");
+	kingdomEnemy_secret = LoadGraph("graphics/キャラクター素材/Kingdom_Enemy/secret.png");
 
 	preparing_EnemyImg = LoadGraph("graphics/キャラクター素材/Continent_Enemy/4_2.png");
 }
